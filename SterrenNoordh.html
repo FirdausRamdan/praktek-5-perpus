@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sterren Noordh Restaurant</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(0, 0, 50, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgb(1, 102, 253);
+            width: 80%;
+            max-width: 800px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .category {
+            margin-bottom: 20px;
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .item {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+        .item:nth-child(3n+1), .item:nth-child(3n+2) {
+            width: 30%;
+        }
+        .item:nth-child(3n) {
+            width: 90%;
+        }
+        .item img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            filter: none;
+        }
+        .item-name {
+            font-weight: bold;
+            text-align: center;
+        }
+        .item-drink {
+            color: rgb(255, 0, 0);
+            text-align: center;
+        }
+        .item button {
+            margin-top: 10px;
+            background: rgba(0, 0, 50, 0.8);
+            border: 2px solid #00f;
+            color: #fff;
+            text-shadow: none;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .item button:hover {
+            background: #00f;
+            color: #000;
+            transform: scale(1.1);
+        }
+        .panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 50, 0.9);
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            z-index: 1000;
+        }
+        .panel img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            filter: none;
+        }
+        .panel p {
+            margin: 10px 0;
+        }
+        .panel button {
+            margin-top: 10px;
+            background: rgba(0, 0, 50, 0.8);
+            border: 2px solid #00f;
+            color: #fff;
+            text-shadow: none;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .panel button:hover {
+            background: #00f;
+            color: #000;
+            transform: scale(1.1);
+        }
+        .close-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgb(172, 0, 0);
+            color: #00ccff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 20px;
+            background: url("futuristic.jpeg") no-repeat center center/cover;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: rgb(238, 255, 0);
+            text-shadow: 0 0 10px rgb(0, 186, 233);
+        }
+        .hero button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: rgba(0, 0, 50, 0.8);
+            border: 2px solid #00f;
+            color: #fff;
+            text-shadow: none;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+        .hero button:hover {
+            background: rgb(0, 174, 255);
+            color: #000;
+            transform: scale(1.1);
+        }
+        .promo-panel {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 50, 0.9);
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            z-index: 1000;
+        }
+        .promo-panel img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            filter: none;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 50, 0.8);
+            border-radius: 10px;
+        }
+        .item, .panel, .promo-panel {
+            background: rgba(0, 0, 50, 0.8);
+            border: 2px solid rgb(0, 156, 228);
+            color: #fff;
+            text-shadow: 0 0 10px rgb(0, 2, 148);
+            transition: background 0.3s, color 0.3s;
+        }
+        .item:hover, .panel:hover, .promo-panel:hover {
+            background: rgb(39, 0, 131);
+            color: #ffe600;
+        }
+    </style>
+    <script>
+        function togglePanel(id) {
+            var panel = document.getElementById(id);
+            panel.style.display = "block";
+        }
+
+        function closePanel(id) {
+            var panel = document.getElementById(id);
+            panel.style.display = "none";
+        }
+
+        function orderItem(itemName) {
+            alert("Kamu sudah memesan " + itemName);
+        }
+
+        function showPromo() {
+            var promoPanel = document.getElementById('promoPanel');
+            promoPanel.style.display = "block";
+        }
+
+        function closePromo() {
+            var promoPanel = document.getElementById('promoPanel');
+            promoPanel.style.display = "none";
+        }
+
+        function scrollToCategory(categoryId) {
+            document.getElementById(categoryId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body>
+    <div class="hero">
+        <h1>Sterren Noordh Restaurant</h1>
+        <p>Welcome to Sterren Noordh Restaurant, where we serve the best galactic cuisine!</p>
+        <button onclick="scrollToCategory('appetizers')">Appetizers</button>
+        <button onclick="scrollToCategory('mainCourses')">Main Courses</button>
+        <button onclick="scrollToCategory('desserts')">Desserts</button>
+        <button onclick="showPromo()">Today's Promotion</button>
+    </div>
+    <div class="container">
+        <div id="promoPanel" class="promo-panel">
+            <button class="close-panel" onclick="closePromo()">Close</button>
+            <img src="promotion.png" alt="Promotion">
+        </div>
+        <div id="appetizers" class="category">
+            <h2>Appetizers</h2>
+            <div class="item">
+                <img src="galactic salad.jpeg" alt="Galactic Salad">
+                <span class="item-name">Galactic Salad</span>
+                <span class="item-drink">Moon Juice</span>
+                <button onclick="togglePanel('panel1')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel1" class="panel">
+                <button class="close-panel" onclick="closePanel('panel1')">Exit Panel</button>
+                <img src="galactic salad.jpeg" alt="Galactic Salad">
+                <p>Galactic Salad adalah salad dengan campuran sayuran segar dan saus galaksi yang unik.</p>
+                <p>Harga: $10</p>
+                <button onclick="orderItem('Galactic Salad')">Pesan</button>
+            </div>
+            <div class="item">
+                <img src="star soup.jpeg" alt="Star Soup">
+                <span class="item-name">Star Soup</span>
+                <span class="item-drink">Nebula Nectar</span>
+                <button onclick="togglePanel('panel2')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel2" class="panel">
+                <button class="close-panel" onclick="closePanel('panel2')">Exit Panel</button>
+                <img src="star soup.jpeg" alt="Star Soup">
+                <p>Star Soup adalah sup dengan bintang-bintang kecil yang terbuat dari sayuran dan rempah-rempah.</p>
+                <p>Harga: $8</p>
+                <button onclick="orderItem('Star Soup')">Pesan</button>
+            </div>
+            <div class="item">
+                <img src="cosmic fries.jpeg" alt="Cosmic Fries">
+                <span class="item-name">Cosmic Fries</span>
+                <span class="item-drink">Astro Ale</span>
+                <button onclick="togglePanel('panel3')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel3" class="panel">
+                <button class="close-panel" onclick="closePanel('panel3')">Exit Panel</button>
+                <img src="cosmic fries.jpeg" alt="Cosmic Fries">
+                <p>Cosmic Fries adalah kentang goreng dengan taburan bumbu kosmik yang lezat.</p>
+                <p>Harga: $5</p>
+                <button onclick="orderItem('Cosmic Fries')">Pesan</button>
+            </div>
+        </div>
+        <div id="mainCourses" class="category">
+            <h2>Main Courses</h2>
+            <div class="item">
+                <img src="space burger.jpeg" alt="Space Burger">
+                <span class="item-name">Space Burger</span>
+                <span class="item-drink">Galaxy Soda</span>
+                <button onclick="togglePanel('panel4')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel4" class="panel">
+                <button class="close-panel" onclick="closePanel('panel4')">Exit Panel</button>
+                <img src="space burger.jpeg" alt="Space Burger">
+                <p>Space Burger adalah burger dengan daging sapi berkualitas tinggi dan saus luar angkasa.</p>
+                <p>Harga: $12</p>
+                <button onclick="orderItem('Space Burger')">Pesan</button>
+            </div>
+            <div class="item">
+                <img src="martian pizza.jpeg" alt="Martian Pizza">
+                <span class="item-name">Martian Pizza</span>
+                <span class="item-drink">Planet Punch</span>
+                <button onclick="togglePanel('panel5')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel5" class="panel">
+                <button class="close-panel" onclick="closePanel('panel5')">Exit Panel</button>
+                <img src="martian pizza.jpeg" alt="Martian Pizza">
+                <p>Martian Pizza adalah pizza dengan topping sayuran dan daging dari Mars.</p>
+                <p>Harga: $15</p>
+                <button onclick="orderItem('Martian Pizza')">Pesan</button>
+            </div>
+            <div class="item">
+                <img src="alien pasta.jpeg" alt="Alien Pasta">
+                <span class="item-name">Alien Pasta</span>
+                <span class="item-drink">Comet Cola</span>
+                <button onclick="togglePanel('panel6')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel6" class="panel">
+                <button class="close-panel" onclick="closePanel('panel6')">Exit Panel</button>
+                <img src="alien pasta.jpeg" alt="Alien Pasta">
+                <p>Alien Pasta adalah pasta dengan saus hijau yang terbuat dari bahan-bahan alien.</p>
+                <p>Harga: $10</p>
+                <button onclick="orderItem('Alien Pasta')">Pesan</button>
+            </div>
+        </div>
+        <div id="desserts" class="category">
+            <h2>Desserts</h2>
+            <div class="item">
+                <img src="meteor cake.jpeg" alt="Meteor Cake">
+                <span class="item-name">Meteor Cake</span>
+                <span class="item-drink">Starlight Shake</span>
+                <button onclick="togglePanel('panel7')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel7" class="panel">
+                <button class="close-panel" onclick="closePanel('panel7')">Exit Panel</button>
+                <img src="meteor cake.jpeg" alt="Meteor Cake">
+                <p>Meteor Cake adalah kue dengan bentuk meteor dan rasa cokelat yang lezat.</p>
+                <p>Harga: $7</p>
+                <button onclick="orderItem('Meteor Cake')">Pesan</button>
+            </div>
+            <div class="item">
+                <img src="ateroid ice cream.jpeg" alt="Asteroid Ice Cream">
+                <span class="item-name">Asteroid Ice Cream</span>
+                <span class="item-drink">Cosmos Coffee</span>
+                <button onclick="togglePanel('panel8')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel8" class="panel">
+                <button class="close-panel" onclick="closePanel('panel8')">Exit Panel</button>
+                <img src="ateroid ice cream.jpeg" alt="">
+                <p>Asteroid Ice Cream adalah es krim dengan potongan asteroid yang renyah.</p>
+                <p>Harga: $6</p>
+                <button onclick="orderItem('Asteroid Ice Cream')">Pesan</button>
+            </div>
+            <div class="item">
+                <img src="blackhole brownie.jpeg" alt="Black Hole Brownie">
+                <span class="item-name">Black Hole Brownie</span>
+                <span class="item-drink">Eclipse Espresso</span>
+                <button onclick="togglePanel('panel9')">Lihat Selanjutnya</button>
+            </div>
+            <div id="panel9" class="panel">
+                <button class="close-panel" onclick="closePanel('panel9')">Exit Panel</button>
+                <img src="blackhole brownie.jpeg" alt="Black Hole Brownie">
+                <p>Black Hole Brownie adalah brownie dengan rasa cokelat pekat yang menarik.</p>
+                <p>Harga: $9</p>
+                <button onclick="orderItem('Black Hole Brownie')">Pesan</button>
+            </div>
+        </div>
+        <div class="footer">
+            <h2>Sterren Noordh Restaurant</h2>
+            <p>Thank you for visiting Sterren Noordh Restaurant. We hope you have a stellar dining experience!</p>
+            <p>&copy; 2023 Sterren Noordh Restaurant. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
